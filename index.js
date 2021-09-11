@@ -42,7 +42,6 @@ const contract = require("./contract.js");
 // GetTokens is passed _address, _arrayOfTokenIDs
 // Promise<GetTokenInformation> reject passed tokenID
 // GetTokens catches reject, call GetTokenInformation with passed ID
-// Cache _contractData
 
 function GetTokenInformation(_address, _tokenID)
 {

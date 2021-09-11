@@ -1,4 +1,5 @@
 const utils = require("./util.js");
+const web3 = require("web3");
 
 function CallContractFunction(_address, _function, _arguments)
 {
@@ -35,6 +36,9 @@ function CallContractFunction(_address, _function, _arguments)
 
 	return _promise;
 }
+
+// NOTE: [rusty]
+// Cache _contractData
 
 function GetContractInformation(_address)
 {

@@ -49,10 +49,17 @@ const DATA_HANDLER = {
 	"binary/octet-stream": _rawData => {
 		return JSON.parse(_rawData);
 	},
-	"application/json; charset=utf-8": _rawData => {
+	"application/json": _rawData => {
 		return JSON.parse(_rawData);
-	}
+	},
 }
+
+http.globalAgent = new http.Agent({
+	keepAlive: true,
+	keepAliveMsecs: 1000,
+	timeout: 30000,
+	maxFreeSockets: 256,
+})
 
 function API_REQUEST(_tokenURI) 
 {
@@ -72,8 +79,6 @@ function API_REQUEST(_tokenURI)
 								`Expected application/json or binary/octet-stream but received ${contentType}`);
 			}
 			if (error) {
-				console.error(error.message);
-
 				// Consume response data to free up memory
 				res.resume();
 
@@ -87,13 +92,17 @@ function API_REQUEST(_tokenURI)
 			let rawData = '';
 			res.on('data', (chunk) => { rawData += chunk; });
 			res.on('end', () => {
-				let _processedData = DATA_HANDLER[contentType](rawData);
+				let _handler = DATA_HANDLER[contentType.split(";")[0]];
+				if (!_handler) {
+					reject("Error: invalid data handler! Content type: " + contentType);
+					return;
+				}
+
+				let _processedData = _handler(rawData);
 
 				resolve(_processedData);
 			});
 		}).on('error', (e) => {
-			console.error(`Got error: ${e.message}`);
-
 			reject(e.message);
 		});
 	});

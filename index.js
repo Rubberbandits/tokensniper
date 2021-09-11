@@ -37,6 +37,13 @@ const utils = require("./util.js");
 
 const contract = require("./contract.js");
 
+// NOTE: [rusty]
+// use GetTokenInformation to retrieve data for single token
+// GetTokens is passed _address, _arrayOfTokenIDs
+// Promise<GetTokenInformation> reject passed tokenID
+// GetTokens catches reject, call GetTokenInformation with passed ID
+// Cache _contractData
+
 function GetTokenInformation(_address, _tokenID)
 {
 	let _promise = new Promise((resolve, reject) => {
@@ -46,7 +53,46 @@ function GetTokenInformation(_address, _tokenID)
 	return _promise;
 }
 
-function DumpTokenInformation(_data)
+function GetAllTokens(_address)
+{
+	let _promise = new Promise((resolve, reject) => {
+		contract.GetContractInformation(_address)
+			.then(async _contractData => {
+				let _baseURI = _contractData.baseURI;
+				let _totalSupply = _contractData.totalSupply;
+				let _url = new URL(_baseURI);
+
+				if (_url.protocol == "ipfs:") {
+					_baseURI = `https://cloudflare-ipfs.com/ipfs/${_url.hostname}/`
+				}
+			
+				let _promises = [];
+				let _allResults = [];
+
+				for (let _tokenID = 0; _tokenID < _totalSupply; _tokenID++) {
+					_promises.push(utils.API_REQUEST(_baseURI + _tokenID));
+				}
+			
+				await Promise.allSettled(_promises)
+					.then(_results => {
+						_results.forEach(_data => {
+							if (_data.status == "fulfilled") {
+								_allResults.push(_data.value);
+							}
+						});
+					}, _err => {
+						reject(_err);
+					})
+					.finally(() => {
+						resolve(_allResults);
+					});
+			});
+	});
+
+	return _promise;
+}
+
+function WriteTokenInformation(_data)
 {
 
 }
@@ -76,18 +122,18 @@ function MonitorMetadata(_address)
 			let _tokenURI = _trimmed.slice(2);
 
 			if (lastBaseURI.length > 0 && _tokenURI != lastBaseURI) {
-				notify.Send("");
+				notify.Send("Token Base URI has changed!");
 				return;
 			};
 
 			lastBaseURI = _tokenURI;
 			
-			API_REQUEST(_tokenURI)
+			utils.API_REQUEST(_tokenURI)
 				.then(_tokenData => {
 					let _json = JSON.stringify(_tokenData);
 
 					if (lastTokenData.length > 0 && _json != lastTokenData) {
-						notify.Send("");
+						notify.Send("Token data has changed!");
 						return;
 					}
 
@@ -108,3 +154,9 @@ if (contractAddress.length == 0) {
 }
 
 //MonitorMetadata(contractAddress);
+GetAllTokens(contractAddress)
+	.then(_tokens => {
+		console.log(_tokens.length);
+	}, _err => {
+		console.log(_err);
+	});

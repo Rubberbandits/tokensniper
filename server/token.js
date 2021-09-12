@@ -30,6 +30,7 @@ function GetTokenInformation(_address, _tokenID, _totalSupply)
 
 				network.API_REQUEST(_baseURI + _tokenID, Math.ceil(_tokenID / _totalSupply * 13))
 					.then(_result => {
+						console.log(_tokenID)
 						resolve(_result);
 					})
 					.catch(_err => {

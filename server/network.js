@@ -162,7 +162,7 @@ async function API_REQUEST(_tokenURI, _agentID) {
 					{
 						host: _tokenURI.hostname,
 						path: _tokenURI.pathname,
-						agent: _agent,      // cannot use a default agent
+						//agent: _agent,      // cannot use a default agent
 					}, (res) => {
 						let chunks = []
 						res.on('data', chunk => chunks.push(chunk))

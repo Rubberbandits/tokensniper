@@ -32,74 +32,22 @@ const notify = require("./notification.js");
 const utils = require("./util.js");
 
 /*
-	Main Functions
+	Networking Functions
+*/
+
+const network = require("./network.js");
+
+/*
+	Contract Functions
 */
 
 const contract = require("./contract.js");
 
-// NOTE: [rusty]
-// use GetTokenInformation to retrieve data for single token
-// GetTokens is passed _address, _arrayOfTokenIDs
-// Promise<GetTokenInformation> reject passed tokenID
-// GetTokens catches reject, call GetTokenInformation with passed ID
+/*
+	Token Functions
+*/
 
-function GetTokenInformation(_address, _tokenID)
-{
-	let _promise = new Promise((resolve, reject) => {
-
-	});
-
-	return _promise;
-}
-
-function GetAllTokens(_address)
-{
-	let _promise = new Promise((resolve, reject) => {
-		contract.GetContractInformation(_address)
-			.then(async _contractData => {
-				let _baseURI = _contractData.baseURI;
-				let _totalSupply = _contractData.totalSupply;
-				let _url = new URL(_baseURI);
-
-				if (_url.protocol == "ipfs:") {
-					_baseURI = `https://cloudflare-ipfs.com/ipfs/${_url.hostname}/`
-				}
-			
-				let _promises = [];
-				let _allResults = [];
-
-				for (let _tokenID = 0; _tokenID < _totalSupply; _tokenID++) {
-					_promises.push(utils.API_REQUEST(_baseURI + _tokenID));
-				}
-			
-				await Promise.allSettled(_promises)
-					.then(_results => {
-						_results.forEach(_data => {
-							if (_data.status == "fulfilled") {
-								_allResults.push(_data.value);
-							}
-						});
-					}, _err => {
-						reject(_err);
-					})
-					.finally(() => {
-						resolve(_allResults);
-					});
-			});
-	});
-
-	return _promise;
-}
-
-function WriteTokenInformation(_data)
-{
-
-}
-
-function CalculateRarityDistribution(_data)
-{
-
-}
+const token = require("./token.js");
 
 let killWatcher = false;
 let lastBaseURI = "";
@@ -122,6 +70,14 @@ function MonitorMetadata(_address)
 
 			if (lastBaseURI.length > 0 && _tokenURI != lastBaseURI) {
 				notify.Send("Token Base URI has changed!");
+
+				GetAllTokens(contractAddress)
+					.then(_tokens => {
+						console.log(_tokens.length);
+					}, _err => {
+						console.log(_err);
+					});
+
 				return;
 			};
 
@@ -133,6 +89,14 @@ function MonitorMetadata(_address)
 
 					if (lastTokenData.length > 0 && _json != lastTokenData) {
 						notify.Send("Token data has changed!");
+
+						GetAllTokens(contractAddress)
+							.then(_tokens => {
+								console.log(_tokens.length);
+							}, _err => {
+								console.log(_err);
+							});
+
 						return;
 					}
 
@@ -147,15 +111,54 @@ function MonitorMetadata(_address)
 	Entrypoint
 */
 
-if (contractAddress.length == 0) {
-	console.log("ERROR: Invalid contract address specified!")
-	return;
+/*
+async function Main()
+{
+	console.log("Starting TokenSniper...");
+
+	if (contractAddress.length == 0) {
+		console.log("ERROR: Invalid contract address specified!")
+		return;
+	}
+	*/
+	
+	/*
+		Bootstrap
+	*/
+
+	/*
+	let _promises = [];
+
+	await Promise.allSettled(_promises)
+		.then(() => {})
+		.catch(_err => {
+			console.log(`BOOTSTRAP ERROR CAUGHT: ${_err}`)
+		})
+		.finally(() => {
+			console.log("Loaded TokenSniper!");
+
+			//MonitorMetadata(contractAddress);
+		});
+};
+
+Main();
+*/
+
+(async function updateProgress() {
+    setTimeout(updateProgress, 1000);
+})();
+
+process.on("SIGINT", () => {
+	process.exit();
+})
+
+let _tokenIDs = [];
+for (let i = 0; i < 100; i++) {
+	_tokenIDs.push(i);
 }
 
-//MonitorMetadata(contractAddress);
-GetAllTokens(contractAddress)
+token.GetTokens(contractAddress, _tokenIDs)
 	.then(_tokens => {
-		console.log(_tokens.length);
-	}, _err => {
-		console.log(_err);
+		console.log(_tokens);
+		process.exit();
 	});

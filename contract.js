@@ -40,9 +40,16 @@ function CallContractFunction(_address, _function, _arguments)
 // NOTE: [rusty]
 // Cache _contractData
 
-function GetContractInformation(_address)
+var CONTRACTS = {};
+
+function GetContractInformation(_address, _forceUpdate)
 {
 	let _promise = new Promise((resolve, reject) => {
+		if (CONTRACTS[_address] && !_forceUpdate) {
+			resolve(CONTRACTS[_address]);
+			return;
+		};
+
 		let _contractData = {};
 
 		CallContractFunction(_address, "totalSupply()", "")
@@ -56,6 +63,8 @@ function GetContractInformation(_address)
 					.then((_data) => {
 						let _trimmed = web3.utils.toUtf8(_data.result).replace(/\0/g, '')
 						_contractData.baseURI = _trimmed.slice(2, _trimmed.length - 1);
+						
+						CONTRACTS[_address] = _contractData;
 
 						resolve(_contractData);
 					});

@@ -144,18 +144,30 @@ async function Main()
 Main();
 */
 
+if (contractAddress.length == 0) {
+	console.log("ERROR: Invalid contract address specified!")
+	return;
+}
+
 process.on("SIGINT", () => {
 	process.exit();
 })
 
-let _tokenIDs = [];
-for (let i = 0; i < 100; i++) {
-	_tokenIDs.push(i);
+async function main() {
+	let _tokenIDs = [];
+	for (let i = 0; i < 4444; i++) {
+		_tokenIDs.push(i);
+	}
+
+	let _start = new Date();
+	await token.GetTokens(contractAddress, _tokenIDs)
+		.then(_tokens => {
+			console.log(_tokens[_tokens.length - 1])
+			console.log(`API Scrape took ${new Date() - _start}ms`);
+		})
+		.catch(_err => {
+			console.log(_err)
+		})
 }
 
-let _start = new Date();
-token.GetTokens(contractAddress, _tokenIDs)
-	.then(_tokens => {
-		console.log(`API Scrape took ${new Date() - _start}ms`);
-		process.exit();
-	});
+main()

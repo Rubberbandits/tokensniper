@@ -3,6 +3,8 @@ const axios = require("axios");
 const { SocksProxyAgent } = require("socks-proxy-agent");
 
 var PROXY_AGENTS = {};
+var PROXIES = [];
+/*
 var PROXIES = [
 	{
 		host: "154.16.39.77",
@@ -95,6 +97,7 @@ var PROXIES = [
 		password: "F2b5HkZ",
 	},
 ];
+*/
 
 let PROXY_PROCESSING = {};
 
@@ -133,7 +136,7 @@ function GET_PROXY_AGENT(_proxyID)
 	return _promise;
 }
 
-async function API_REQUEST(_tokenURI, _agentID) {
+function API_REQUEST(_tokenURI, _agentID) {
 	if (typeof _tokenURI == "string") {
 		_tokenURI = new URL(_tokenURI);
 	}
@@ -141,19 +144,16 @@ async function API_REQUEST(_tokenURI, _agentID) {
 	let _promise = new Promise((resolve, reject) => {
 		GET_PROXY_AGENT(_agentID)
 			.then(_agent => {
-				const timer = setTimeout(() => {
-					console.log("timed out")
-					reject(new Error(`API Request timed out after ${5000}ms!`));
-				}, 5000);
-
 				axios.get(_tokenURI.href, {httpsAgent: _agent})
 					.then(_res => {
-						clearTimeout(timer);
+						if (_res.status != 200) {
+							reject("HTTP status not 200");
+							return;
+						};
+
 						resolve(_res.data);
 					})
 					.catch(_err => {
-						console.log("reject")
-						clearTimeout(timer);
 						reject(_err);
 					});
 			})

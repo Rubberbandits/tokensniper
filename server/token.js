@@ -28,7 +28,7 @@ function GetTokenInformation(_address, _tokenID, _totalSupply)
 					_baseURI = `https://cloudflare-ipfs.com/ipfs/${_url.hostname}/`
 				}
 
-				network.API_REQUEST(_baseURI + _tokenID, Math.ceil(_tokenID / _totalSupply * 13))
+				network.API_REQUEST(_baseURI + _tokenID, Math.floor((_tokenID / _totalSupply) * 14))
 					.then(_result => {
 						console.log(_tokenID)
 						resolve(_result);

@@ -1,5 +1,6 @@
 const console = require("console");
-
+const axios = require("axios");
+const socks = require("socks-proxy-agent");
 
 var PROXY_AGENTS = {};
 var PROXIES = [

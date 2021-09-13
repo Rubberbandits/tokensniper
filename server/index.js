@@ -17,7 +17,7 @@ const contractAddress = myArgs.length > 0 ? myArgs[0] : "";
 const console = require("console");
 const web3 = require("web3");
 const ipfs = require("ipfs");
-const {Worker} = require('worker_threads');
+//const {Worker} = require('worker_threads');
 
 /*
 	Notifications

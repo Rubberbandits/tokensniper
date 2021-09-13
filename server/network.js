@@ -1,6 +1,6 @@
 const console = require("console");
 const axios = require("axios");
-const socks = require("socks-proxy-agent");
+const { SocksProxyAgent } = require("socks-proxy-agent");
 
 var PROXY_AGENTS = {};
 var PROXIES = [
@@ -98,16 +98,12 @@ var PROXIES = [
 
 let PROXY_PROCESSING = {};
 
-function GET_PROXY_AGENT(_proxyID, _url)
+function GET_PROXY_AGENT(_proxyID)
 {
-	if (typeof _url == "string") {
-		_url = new URL(_url);
-	}
-
 	let _promise = new Promise((resolve, reject) => {
 		let _proxyInfo = PROXIES[_proxyID];
 		if (!_proxyInfo) {
-			reject("Invalid proxyID");
+			resolve(null);
 			return;
 		}
 
@@ -117,7 +113,18 @@ function GET_PROXY_AGENT(_proxyID, _url)
 		if (!_proxyAgent && !_agentProcessing) {
 			PROXY_PROCESSING[_proxyID] = true;
 
-			
+			let _agent = new SocksProxyAgent(
+				{
+					host: _proxyInfo.host,
+					port: _proxyInfo.port,
+					userId: _proxyInfo.user,
+					password: _proxyInfo.password,
+					protocol: "socks5"
+				}
+			);
+
+			PROXY_AGENTS[_proxyID] = _agent;
+			resolve(_agent);
 		} else if (!_agentProcessing) {
 			resolve(_proxyAgent);
 		}
@@ -132,9 +139,23 @@ async function API_REQUEST(_tokenURI, _agentID) {
 	}
 
 	let _promise = new Promise((resolve, reject) => {
-		GET_PROXY_AGENT(_agentID, _tokenURI)
+		GET_PROXY_AGENT(_agentID)
 			.then(_agent => {
-				
+				const timer = setTimeout(() => {
+					console.log("timed out")
+					reject(new Error(`API Request timed out after ${5000}ms!`));
+				}, 5000);
+
+				axios.get(_tokenURI.href, {httpsAgent: _agent})
+					.then(_res => {
+						clearTimeout(timer);
+						resolve(_res.data);
+					})
+					.catch(_err => {
+						console.log("reject")
+						clearTimeout(timer);
+						reject(_err);
+					});
 			})
 			.catch(_err => {
 				reject(_err);
@@ -145,3 +166,4 @@ async function API_REQUEST(_tokenURI, _agentID) {
 }
 
 exports.API_REQUEST = API_REQUEST;
+exports.PROXIES = PROXIES;

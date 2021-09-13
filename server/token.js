@@ -10,6 +10,13 @@ const network = require("./network.js");
 
 const contract = require("./contract.js");
 
+/*
+	Event Emitter
+*/
+
+const { EventEmitter } = require("stream");
+const emitter = new EventEmitter;
+
 // NOTE: [rusty]
 // use GetTokenInformation to retrieve data for single token
 // GetTokens is passed _address, _arrayOfTokenIDs
@@ -20,7 +27,7 @@ function GetTokenInformation(_address, _tokenID, _totalSupply)
 {
 	let _promise = new Promise((resolve, reject) => {
 		contract.GetContractInformation(_address)
-			.then(_contractData => {
+			.then(async _contractData => {
 				let _baseURI = _contractData.baseURI;
 				let _url = new URL(_baseURI);
 
@@ -28,9 +35,13 @@ function GetTokenInformation(_address, _tokenID, _totalSupply)
 					_baseURI = `https://cloudflare-ipfs.com/ipfs/${_url.hostname}/`
 				}
 
-				network.API_REQUEST(_baseURI + _tokenID, Math.floor((_tokenID / _totalSupply) * 14))
+				let _agentID = Math.ceil((_tokenID / _totalSupply) * (network.PROXIES.length))
+
+				let _start = new Date()
+				console.log(`Started request for TokenID ${_tokenID} with Proxy ${_agentID}`)
+				await network.API_REQUEST(_baseURI + _tokenID, _agentID)
 					.then(_result => {
-						console.log(_tokenID)
+						console.log(`Finished request for TokenID ${_tokenID} with Proxy ${_agentID} (${new Date() - _start}ms)`)
 						resolve(_result);
 					})
 					.catch(_err => {
@@ -65,6 +76,7 @@ function GetTokens(_address, _tokenIDs)
 					}
 				})
 				.catch(_tokenID => {
+					console.log("retry")
 					_RETRY(_tokenID);
 				});
 		}
@@ -89,3 +101,4 @@ function CalculateRarityDistribution(_data)
 
 exports.GetTokenInformation = GetTokenInformation;
 exports.GetTokens = GetTokens;
+exports.events = emitter;

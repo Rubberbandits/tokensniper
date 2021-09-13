@@ -144,10 +144,6 @@ async function Main()
 Main();
 */
 
-(async function updateProgress() {
-    setTimeout(updateProgress, 1000);
-})();
-
 process.on("SIGINT", () => {
 	process.exit();
 })
@@ -157,8 +153,9 @@ for (let i = 0; i < 100; i++) {
 	_tokenIDs.push(i);
 }
 
+let _start = new Date();
 token.GetTokens(contractAddress, _tokenIDs)
 	.then(_tokens => {
-		console.log(_tokens);
+		console.log(`API Scrape took ${new Date() - _start}ms`);
 		process.exit();
 	});

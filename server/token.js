@@ -11,11 +11,8 @@ const network = require("./network.js");
 const contract = require("./contract.js");
 
 /*
-	Event Emitter
+	Functions
 */
-
-const { EventEmitter } = require("stream");
-const emitter = new EventEmitter;
 
 function GetTokenInformation(_address, _tokenID, _totalSupply)
 {
@@ -84,4 +81,3 @@ function CalculateRarityDistribution(_data)
 
 exports.GetTokenInformation = GetTokenInformation;
 exports.GetTokens = GetTokens;
-exports.events = emitter;

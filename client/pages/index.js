@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
 		<Head>
-			<title>Vorsin</title>
+			<title>Vorsin Tools</title>
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
@@ -14,7 +14,7 @@ export default function Home() {
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
 					<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
 				</svg>
-				<span class="ml-3 text-xl">Vorsin</span>
+				<span class="ml-3 text-xl">Vorsin Tools</span>
 				</a>
 				<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
 				<a href="#home" class="mr-5 hover:text-gray text-white">Home</a>
@@ -23,38 +23,111 @@ export default function Home() {
 				<a href="#team" class="mr-5 hover:text-gray text-white">Team</a>
 				<a href="https://discord.gg/QMDCWC6wYV" class="mr-5 hover:text-gray text-white">Discord</a>
 				</nav>
-				<button class="inline-flex items-center bg-orange border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base text-white mt-4 md:mt-0">Login
-				<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-					<path d="M5 12h14M12 5l7 7-7 7"></path>
-				</svg>
-				</button>
 			</div>
 		</header>
 
-		<div id="home">
-			<section class="text-gray-600 body-font">
-				<div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
-					<img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600" />
-					<div class="text-center lg:w-2/3 w-full">
-					<h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Microdosing synth tattooed vexillologist</h1>
-					<p class="mb-8 leading-relaxed">Meggings kinfolk echo park stumptown DIY, kale chips beard jianbing tousled. Chambray dreamcatcher trust fund, kitsch vice godard disrupt ramps hexagon mustache umami snackwave tilde chillwave ugh. Pour-over meditation PBR&amp;B pickled ennui celiac mlkshk freegan photo booth af fingerstache pitchfork.</p>
-					<div class="flex justify-center">
-						<button class="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg">Button</button>
-						<button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">Button</button>
-					</div>
+		<div id="home">	
+		  <section class="text-blueGray-700 ">
+            <div class="container flex flex-col items-center px-5 py-8 mx-auto">
+              <div class="flex flex-col w-full mb-12 text-left ">
+                <div class="w-full mx-auto lg:w-1/2">
+                  <h1 class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">Become an ERC-721 power-user.</h1>
+                  <h2 class="mx-auto mb-4 text-xl font-semibold leading-none tracking-tighter text-black title-font">Take every advantage in a diverse and fast-paced market.</h2>
+                  <p class="mx-auto text-base font-medium leading-relaxed text-blueGray-700 ">Every investor must have cutting edge tools to assure profit maximization and smart allocation of liquidity. Vorsin specializes in ERC-721 tokens and market trends in the non-fungible token space.</p>
+                </div>
+              </div>
+              <div class="container px-5 mx-auto flex flex-wrap">
+					<div class="flex flex-wrap md:-m-2 -m-1">
+						<div class="flex flex-wrap w-1/2">
+							<div class="md:p-2 p-1 w-1/2">
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300" />
+							</div>
+							<div class="md:p-2 p-1 w-1/2">
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/501x301" />
+							</div>
+							<div class="md:p-2 p-1 w-full">
+							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360" />
+							</div>
+						</div>
+						<div class="flex flex-wrap w-1/2">
+							<div class="md:p-2 p-1 w-full">
+							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/601x361" />
+							</div>
+							<div class="md:p-2 p-1 w-1/2">
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/502x302" />
+							</div>
+							<div class="md:p-2 p-1 w-1/2">
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/503x303" />
+							</div>
+						</div>
 					</div>
 				</div>
-			</section>
+            </div>
+          </section>
 		</div>
 
 		<div id="features">
 			<section class="text-gray-600 body-font">
 				<div class="container px-5 py-24 mx-auto">
 					<div class="flex flex-col text-center w-full mb-20">
-					<h2 class="text-xs text-yellow-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2>
-					<h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Master Cleanse Reliac Heirloom</h1>
+					<h2 class="text-xs text-yellow-500 tracking-widest font-medium title-font mb-1">MORE THAN SOFTWARE</h2>
+					<h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">Features</h1>
 					</div>
 					<div class="flex flex-wrap -m-4">
+					<div class="p-4 md:w-1/3">
+						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+						<div class="flex items-center mb-3">
+							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
+							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+								<circle cx="6" cy="6" r="3"></circle>
+								<circle cx="6" cy="18" r="3"></circle>
+								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+							</svg>
+							</div>
+							<h2 class="text-gray-900 text-lg title-font font-medium">Metadata Capturing</h2>
+						</div>
+						<div class="flex-grow">
+							<p class="leading-relaxed text-base">In the land of the blind, the one-eyed man is king. Vorsin utilizes industry-leading techniques to collect metadata as soon as it is released, allowing you to make informed purchases instead of relying on chance. Vorsin reveals all.</p>
+						</div>
+						</div>
+					</div>
+
+					<div class="p-4 md:w-1/3">
+						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+						<div class="flex items-center mb-3">
+							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
+							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+								<circle cx="6" cy="6" r="3"></circle>
+								<circle cx="6" cy="18" r="3"></circle>
+								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+							</svg>
+							</div>
+							<h2 class="text-gray-900 text-lg title-font font-medium">Smart Contract Monitor</h2>
+						</div>
+						<div class="flex-grow">
+							<p class="leading-relaxed text-base">From anywhere in the world, be the first to know when a collection goes live. Vorsin allows any variable of a smart contract to be monitored, notifying you by phone, SMS or Discord of any change.</p>
+						</div>
+						</div>
+					</div>
+
+					<div class="p-4 md:w-1/3">
+						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
+						<div class="flex items-center mb-3">
+							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
+							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+								<circle cx="6" cy="6" r="3"></circle>
+								<circle cx="6" cy="18" r="3"></circle>
+								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+							</svg>
+							</div>
+							<h2 class="text-gray-900 text-lg title-font font-medium">Automate Tasks</h2>
+						</div>
+						<div class="flex-grow">
+							<p class="leading-relaxed text-base">Forget about gas wars. Leverage our state-of-the-art servers to be the first to make it to any collection. Techniques based on automated trading systems used on Wall Street, let us make the purchases for you.</p>
+						</div>
+						</div>
+					</div>
+
 					<div class="p-4 md:w-1/3">
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
@@ -63,15 +136,10 @@ export default function Home() {
 								<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
 							</svg>
 							</div>
-							<h2 class="text-gray-900 text-lg title-font font-medium">Shooting Stars</h2>
+							<h2 class="text-gray-900 text-lg title-font font-medium">Dockerized Ethereum Node</h2>
 						</div>
 						<div class="flex-grow">
-							<p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-							<a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-								<path d="M5 12h14M12 5l7 7-7 7"></path>
-							</svg>
-							</a>
+							<p class="leading-relaxed text-base">Instead of relying on a third-party node or API to interact with the blockchain, we host our own Ethereum node. This allows the platform to make lighning-fast requests, blazing past the competition where it matters.</p>
 						</div>
 						</div>
 					</div>
@@ -84,37 +152,27 @@ export default function Home() {
 								<circle cx="12" cy="7" r="4"></circle>
 							</svg>
 							</div>
-							<h2 class="text-gray-900 text-lg title-font font-medium">The Catalyzer</h2>
+							<h2 class="text-gray-900 text-lg title-font font-medium">C# for Speed, Node.JS for Simplicity</h2>
 						</div>
 						<div class="flex-grow">
-							<p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-							<a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-								<path d="M5 12h14M12 5l7 7-7 7"></path>
-							</svg>
-							</a>
+							<p class="leading-relaxed text-base">Vorsin relies on both C# and Node.JS, making speed-critical systems lightning fast and platform back-end easily scalable.</p>
 						</div>
 						</div>
 					</div>
+
 					<div class="p-4 md:w-1/3">
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<circle cx="6" cy="6" r="3"></circle>
-								<circle cx="6" cy="18" r="3"></circle>
-								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+								<circle cx="12" cy="7" r="4"></circle>
 							</svg>
 							</div>
-							<h2 class="text-gray-900 text-lg title-font font-medium">Neptune</h2>
+							<h2 class="text-gray-900 text-lg title-font font-medium">Street Sweeper? Floor Sweeper.</h2>
 						</div>
 						<div class="flex-grow">
-							<p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
-							<a class="mt-3 text-yellow-500 inline-flex items-center">Learn More
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-								<path d="M5 12h14M12 5l7 7-7 7"></path>
-							</svg>
-							</a>
+							<p class="leading-relaxed text-base">Find tokens at floor price before they explode in value. When using Vorsin's tools in concert, we guarantee success in collection releases, leveraging your ethereum to it's fullest potential.</p>
 						</div>
 						</div>
 					</div>
@@ -128,7 +186,7 @@ export default function Home() {
 				<div class="container px-5 py-24 mx-auto">
 					<div class="flex flex-col text-center w-full mb-20">
 					<h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
-					<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
+					<p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Massive benefit for a fair price.</p>
 					</div>
 					<div class="flex flex-wrap -m-4 justify-center">
 					<div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -143,35 +201,42 @@ export default function Home() {
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
 								<path d="M20 6L9 17l-5-5"></path>
 							</svg>
-							</span>Vexillologist pitchfork
+							</span>Metadata capturing
 						</p>
 						<p class="flex items-center text-gray-600 mb-2">
 							<span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
 								<path d="M20 6L9 17l-5-5"></path>
 							</svg>
-							</span>Tumeric plaid portland
+							</span>Smart contract monitoring
 						</p>
 						<p class="flex items-center text-gray-600 mb-2">
 							<span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
 								<path d="M20 6L9 17l-5-5"></path>
 							</svg>
-							</span>Hexagon neutra unicorn
+							</span>Platform-hosted wallet
+						</p>
+						<p class="flex items-center text-gray-600 mb-2">
+							<span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
+							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+								<path d="M20 6L9 17l-5-5"></path>
+							</svg>
+							</span>Automated contract interactions
 						</p>
 						<p class="flex items-center text-gray-600 mb-6">
 							<span class="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
 								<path d="M20 6L9 17l-5-5"></path>
 							</svg>
-							</span>Mixtape chillwave tumeric
+							</span>Private Discord access
 						</p>
-						<button class="flex items-center mt-auto text-white bg-yellow-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-600 rounded">Button
+						<button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" disabled>Purchase
 							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
 							<path d="M5 12h14M12 5l7 7-7 7"></path>
 							</svg>
 						</button>
-						<p class="text-xs text-gray-500 mt-3">Literally you probably haven't heard of them jean shorts.</p>
+						<p class="text-xs text-gray-500 mt-3">Purchase and sign-up is done with your personal wallet.</p>
 						</div>
 					</div>
 					</div>
@@ -184,16 +249,16 @@ export default function Home() {
 				<div class="container px-5 py-24 mx-auto">
 					<div class="flex flex-col text-center w-full mb-20">
 					<h1 class="text-2xl font-medium title-font mb-4 text-gray-900">OUR TEAM</h1>
-					<p class="lg:w-2/3 mx-auto leading-relaxed text-base">Team Description</p>
+					<p class="lg:w-2/3 mx-auto leading-relaxed text-base">World-class development meets crypto-currency expertise, our team is a unification of skill and passion. </p>
 					</div>
 					<div class="flex flex-wrap -m-4">
 					<div class="p-4 lg:w-1/4 md:w-1/2">
 						<div class="h-full flex flex-col items-center text-center">
-						<img alt="team" class="flex-shrink-0 rounded-lg w-full h-128 object-cover object-center mb-4" src="https://dummyimage.com/200x200" />
+						<img alt="team" class="flex-shrink-0 rounded-lg w-full h-128 object-cover object-center mb-4" src="/rusty.png" />
 						<div class="w-full">
 							<h2 class="title-font font-medium text-lg text-gray-900">rusty</h2>
 							<h3 class="text-gray-500 mb-3">Lead Developer</h3>
-							<p class="mb-4">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+							<p class="mb-4">Read "Smart Contracts for Dummies" and decided to develop his own bleeding-edge tools. Owns a DigitalGangster.</p>
 							<span class="inline-flex">
 							<a class="ml-2 text-gray-500">
 								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -215,7 +280,7 @@ export default function Home() {
 						<div class="w-full">
 							<h2 class="title-font font-medium text-lg text-gray-900">razor</h2>
 							<h3 class="text-gray-500 mb-3">Developer</h3>
-							<p class="mb-4">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+							<p class="mb-4">Who knew Germany decided to colonize IDA Pro? An expert in reverse-engineering, razor started in the game-hacking scene.</p>
 							<span class="inline-flex">
 							</span>
 						</div>
@@ -226,8 +291,8 @@ export default function Home() {
 						<img alt="team" class="flex-shrink-0 rounded-lg w-full h-128 object-cover object-center mb-4" src="https://lh3.googleusercontent.com/N_ZKOnP-tOgG8cfCYcbg7fk5xFsX1xQ53L0J5hqS6NGaLCfFgEi44Ws0L3nHbCQlb8V7jvW99P5ehOgT7GdfrttOCMqLxo_f5tdbRg=w600" />
 						<div class="w-full">
 							<h2 class="title-font font-medium text-lg text-gray-900">darku</h2>
-							<h3 class="text-gray-500 mb-3">Marketing</h3>
-							<p class="mb-4">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+							<h3 class="text-gray-500 mb-3">Market Analyst</h3>
+							<p class="mb-4">Reincarnated stock-broker, first man to walk in NFT-space, international man of mystery, files his own taxes.</p>
 							<span class="inline-flex">
 							<a class="ml-2 text-gray-500">
 								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -248,8 +313,8 @@ export default function Home() {
 						<img alt="team" class="flex-shrink-0 rounded-lg w-full h-128 object-cover object-center mb-4" src="https://lh3.googleusercontent.com/cFQFas5LPtS2vsF2NwCiqrQCq64AdI5dUeZgHxXgpScHAZeUE90S3zpy48pGdMyaQ77hRJqEUc0zTCks1fP-Me2tj8EXoZwV8YaL=w600" />
 						<div class="w-full">
 							<h2 class="title-font font-medium text-lg text-gray-900">jones</h2>
-							<h3 class="text-gray-500 mb-3">Marketing</h3>
-							<p class="mb-4">DIY tote bag drinking vinegar cronut adaptogen squid fanny pack vaporware.</p>
+							<h3 class="text-gray-500 mb-3">Market Analyst</h3>
+							<p class="mb-4">Vorsin Technologies guinea pig and idea machine, entrusted all of his liquidity to the pre-alpha version of our tools and somehow still made money.</p>
 							<span class="inline-flex">
 							<a class="ml-2 text-gray-500">
 								<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
@@ -276,9 +341,9 @@ export default function Home() {
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-orange rounded-full" viewBox="0 0 24 24">
 					<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
 				</svg>
-				<span class="ml-3 text-xl">Vorsin</span>
+				<span class="ml-3 text-xl">Vorsin Tools</span>
 				</a>
-				<p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021 Vorsin
+				<p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021 Vorsin Technologies
 				</p>
 			</div>
 		</footer>

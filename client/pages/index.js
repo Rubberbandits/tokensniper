@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <div>
+    <div class="bg-white">
 		<Head>
 			<title>Vorsin Tools</title>
 			<link rel="icon" href="/favicon.ico" />
@@ -31,33 +31,33 @@ export default function Home() {
             <div class="container flex flex-col items-center px-5 py-8 mx-auto">
               <div class="flex flex-col w-full mb-12 text-left ">
                 <div class="w-full mx-auto lg:w-1/2">
-                  <h1 class="mx-auto mb-12 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">Become an ERC-721 power-user.</h1>
-                  <h2 class="mx-auto mb-4 text-xl font-semibold leading-none tracking-tighter text-black title-font">Take every advantage in a diverse and fast-paced market.</h2>
-                  <p class="mx-auto text-base font-medium leading-relaxed text-blueGray-700 ">Every investor must have cutting edge tools to assure profit maximization and smart allocation of liquidity. Vorsin specializes in ERC-721 tokens and market trends in the non-fungible token space.</p>
+                  <h1 class="mx-auto mb-4 text-2xl font-semibold leading-none tracking-tighter text-black lg:text-3xl title-font">Become an ERC-721 power-user.</h1>
+                  <h2 class="mx-auto mb-12 text-xl font-semibold leading-none tracking-tighter text-black title-font">Take every advantage in a diverse and fast-paced market.</h2>
+                  <p class="mx-auto text-base font-medium leading-relaxed text-gray-500 ">Every investor must have cutting edge tools to assure profit maximization and smart allocation of liquidity. Vorsin specializes in ERC-721 tokens and market trends in the non-fungible token space.</p>
                 </div>
               </div>
               <div class="container px-5 mx-auto flex flex-wrap">
 					<div class="flex flex-wrap md:-m-2 -m-1">
 						<div class="flex flex-wrap w-1/2">
 							<div class="md:p-2 p-1 w-1/2">
-							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300" />
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300.png&text=++PLACEHOLDER" />
 							</div>
 							<div class="md:p-2 p-1 w-1/2">
-							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/501x301" />
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300.png&text=++PLACEHOLDER" />
 							</div>
 							<div class="md:p-2 p-1 w-full">
-							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360" />
+							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360.png&text=++PLACEHOLDER" />
 							</div>
 						</div>
 						<div class="flex flex-wrap w-1/2">
 							<div class="md:p-2 p-1 w-full">
-							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/601x361" />
+							<img alt="gallery" class="w-full h-full object-cover object-center block" src="https://dummyimage.com/600x360.png&text=++PLACEHOLDER" />
 							</div>
 							<div class="md:p-2 p-1 w-1/2">
-							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/502x302" />
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300.png&text=++PLACEHOLDER" />
 							</div>
 							<div class="md:p-2 p-1 w-1/2">
-							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/503x303" />
+							<img alt="gallery" class="w-full object-cover h-full object-center block" src="https://dummyimage.com/500x300.png&text=++PLACEHOLDER" />
 							</div>
 						</div>
 					</div>
@@ -78,11 +78,7 @@ export default function Home() {
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<circle cx="6" cy="6" r="3"></circle>
-								<circle cx="6" cy="18" r="3"></circle>
-								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-							</svg>
+								<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path></svg>
 							</div>
 							<h2 class="text-gray-900 text-lg title-font font-medium">Metadata Capturing</h2>
 						</div>
@@ -96,11 +92,7 @@ export default function Home() {
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<circle cx="6" cy="6" r="3"></circle>
-								<circle cx="6" cy="18" r="3"></circle>
-								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-							</svg>
+								<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"></path></svg>
 							</div>
 							<h2 class="text-gray-900 text-lg title-font font-medium">Smart Contract Monitor</h2>
 						</div>
@@ -114,11 +106,7 @@ export default function Home() {
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<circle cx="6" cy="6" r="3"></circle>
-								<circle cx="6" cy="18" r="3"></circle>
-								<path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-							</svg>
+								<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 7H7v6h6V7z"></path><path fill-rule="evenodd" d="M7 2a1 1 0 012 0v1h2V2a1 1 0 112 0v1h2a2 2 0 012 2v2h1a1 1 0 110 2h-1v2h1a1 1 0 110 2h-1v2a2 2 0 01-2 2h-2v1a1 1 0 11-2 0v-1H9v1a1 1 0 11-2 0v-1H5a2 2 0 01-2-2v-2H2a1 1 0 110-2h1V9H2a1 1 0 010-2h1V5a2 2 0 012-2h2V2zM5 5h10v10H5V5z" clip-rule="evenodd"></path></svg>
 							</div>
 							<h2 class="text-gray-900 text-lg title-font font-medium">Automate Tasks</h2>
 						</div>
@@ -147,10 +135,7 @@ export default function Home() {
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-								<circle cx="12" cy="7" r="4"></circle>
-							</svg>
+								<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path></svg>
 							</div>
 							<h2 class="text-gray-900 text-lg title-font font-medium">C# for Speed, Node.JS for Simplicity</h2>
 						</div>
@@ -164,10 +149,7 @@ export default function Home() {
 						<div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
 						<div class="flex items-center mb-3">
 							<div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-yellow-500 text-white flex-shrink-0">
-							<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-								<circle cx="12" cy="7" r="4"></circle>
-							</svg>
+								<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path></svg>
 							</div>
 							<h2 class="text-gray-900 text-lg title-font font-medium">Street Sweeper? Floor Sweeper.</h2>
 						</div>

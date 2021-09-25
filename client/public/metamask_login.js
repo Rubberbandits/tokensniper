@@ -64,6 +64,7 @@ function SendLoginRequest(publicAddress, signature)
 	.then(data => {
 		if (data.logged_in) {
 			console.log("logged in successfully!")
+			window.location.assign("/dashboard/")
 		}
 	})
 	.catch(err => {

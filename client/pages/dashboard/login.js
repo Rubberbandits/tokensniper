@@ -3,7 +3,7 @@ import Script from 'next/script'
 
 export default function Login() {
 	return (
-	<> 
+	<div className="h-screen bg-gray-700">
 		<Head>
 			<title>Vorsin Tools - Login</title>
 			<link rel="icon" href="/favicon.ico" />
@@ -22,6 +22,6 @@ export default function Login() {
 			
 			<button id="login" class="btn btn-wide btn-lg bg-orange hover:bg-onyx">Login with Metamask</button>
 		</div>
-	</>
+	</div>
   )
 }

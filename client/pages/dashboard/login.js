@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function Login() {
 	return (
@@ -8,6 +9,9 @@ export default function Login() {
 			<link rel="icon" href="/favicon.ico" />
 		</Head>
 
+		<Script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" strategy="beforeInteractive" />
+		<Script src="/metamask_login.js" strategy="afterInteractive" />
+
 		<div class="container mx-auto flex flex-wrap flex-col items-center h-full justify-center">
 			<a class="flex title-font font-medium items-center text-white mb-12 md:mb-12">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
@@ -15,7 +19,8 @@ export default function Login() {
 				</svg>
 				<span class="ml-3 text-xl">Vorsin Tools</span>
 			</a>
-			<button class="btn btn-wide btn-lg bg-orange hover:bg-onyx">Login with Metamask</button> 
+			
+			<button id="login" class="btn btn-wide btn-lg bg-orange hover:bg-onyx">Login with Metamask</button>
 		</div>
 	</>
   )

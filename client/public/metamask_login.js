@@ -17,6 +17,7 @@ async function LoginFlow()
 			// with the injected provider given by MetaMask
 			web3 = new Web3(ethereum);
 		} catch (error) {
+			console.log(error)
 			alert('You need to allow MetaMask.');
 			return;
 		}
@@ -25,6 +26,7 @@ async function LoginFlow()
 	const coinbase = await web3.eth.getCoinbase();
 	if (!coinbase) {
 		alert('Please activate MetaMask first.');
+		web3 = null;
 		return;
 	}
 

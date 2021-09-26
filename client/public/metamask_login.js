@@ -31,6 +31,7 @@ async function LoginFlow()
 	}
 
 	const publicAddress = coinbase.toLowerCase();
+	sessionStorage.setItem("publicAddress", publicAddress);
 
 	fetch('/api/authenticate?publicAddress=' + publicAddress)
 		.then(res => res.json())
@@ -65,7 +66,8 @@ function SendLoginRequest(publicAddress, signature)
 	.then(response => response.json())
 	.then(data => {
 		if (data.logged_in) {
-			document.cookie = "jwt=" + data.token + "; Path=/;";
+			document.cookie = `sessionJWT=${data.session}; Path=/;`;
+			document.cookie = `refreshJWT=${data.refresh}; Path=/;`;
 
 			window.location.assign("/dashboard/")
 		}

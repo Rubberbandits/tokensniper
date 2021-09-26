@@ -65,7 +65,8 @@ function SendLoginRequest(publicAddress, signature)
 	.then(response => response.json())
 	.then(data => {
 		if (data.logged_in) {
-			console.log("logged in successfully!")
+			document.cookie = "jwt=" + data.token + "; Path=/;";
+
 			window.location.assign("/dashboard/")
 		}
 	})

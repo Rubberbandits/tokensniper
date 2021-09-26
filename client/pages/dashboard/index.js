@@ -1,5 +1,11 @@
 import Head from "next/head";
 import DashboardLayout from "../../layouts/dashboard";
+import Login from "../../components/login";
+
+import { importJWK } from 'jose/key/import';
+import { jwtVerify } from 'jose/jwt/verify';
+
+var jwkSecret = null;
 
 function NavBar() {
 	return (
@@ -66,7 +72,58 @@ function NavBar() {
 	)
 }
 
-export default function Dashboard() {
+function LoadingScreen() {
+	return (
+		<div className="flex justify-center align-middle h-screen bg-gray-700">
+			<Head>
+				<title>Vorsin Tools - Loading</title>
+				<link rel="icon" href="/favicon.ico" />
+			</Head>
+
+			<div className="flex justify-center align-middle">
+				<button class="btn btn-lg btn-ghost loading flex align-middle">loading</button>
+			</div>
+		</div>
+	)
+}
+
+import { GetServerSideProps } from 'next'
+
+export async function getServerSideProps(context) {
+	if (!jwkSecret) {
+		jwkSecret = await importJWK({
+				kty: 'oct',
+				k: process.env.JWT_SECRET
+		  	}, 'HS256');
+	}
+
+	const {res, req} = context;
+	const {cookies} = req;
+
+	try {
+		var { payload, protectedHeader } = await jwtVerify(cookies.jwt, jwkSecret, {
+			issuer: 'vorsin.tools',
+			maxTokenAge: "2 hours",
+		})
+	} catch (error) {
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+	}
+
+	return {
+		props: {
+			logged_in: true
+		}
+	}
+}
+
+export default function Dashboard({logged_in}) {
+	if (!logged_in) 
+		return <Login />
+
 	return (
 	<> 
 		<Head>

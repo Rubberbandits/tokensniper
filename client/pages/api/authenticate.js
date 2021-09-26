@@ -1,13 +1,40 @@
 import ReactDOMServer from "react-dom/server";
 import DefaultErrorPage from 'next/error';
+
 import { recoverPersonalSignature } from 'eth-sig-util';
 import { bufferToHex } from 'ethereumjs-util';
 import { SignJWT } from 'jose/jwt/sign';
+import { importJWK } from 'jose/key/import';
+
+var jwkSecret = null;
+
+import { db } from "../../lib/database";
+
+function GetRandomNonce()
+{
+	let randomNumber = Math.ceil(Math.random() * 9999);
+	return randomNumber < 1000 ? randomNumber + 1000 : randomNumber;
+}
+
+async function RetrieveNonce(publicAddress)
+{
+	let result = await db.query("SELECT `nonce` FROM `users` WHERE `publicAddress` = ?;", publicAddress);
+	if (!result[0]) return false;
+
+	let nonce = result[0].nonce;
+	if (nonce) {
+		return nonce;
+	} else {
+		return false;
+	}
+}
 
 function VerifySignature(publicAddress, signedMessage)
 {
-	let _promise = new Promise((resolve, reject) => {
-		const msg = `I am signing my one-time nonce: 1234`;
+	let _promise = new Promise(async (resolve, reject) => {
+		let lowered = publicAddress.toLowerCase()
+		let nonce = await RetrieveNonce(lowered);
+		const msg = `I am signing my one-time nonce: ${nonce}`;
 
 		const msgBufferHex = bufferToHex(Buffer.from(msg, 'utf8'));
 		const address = recoverPersonalSignature({
@@ -15,8 +42,9 @@ function VerifySignature(publicAddress, signedMessage)
 			sig: signedMessage,
 		});
 
-		if (address.toLowerCase() === publicAddress.toLowerCase()) {
-			resolve(true); // resolve with jwt
+		if (address.toLowerCase() === lowered) {
+			await db.query("UPDATE `users` SET `nonce` = ? WHERE `publicAddress` = ?;", [GetRandomNonce(), lowered]);
+			resolve();
 		} else {
 			reject('Signature verification failed');
 		}
@@ -25,8 +53,15 @@ function VerifySignature(publicAddress, signedMessage)
 	return _promise;
 }
 
-export default function authenticate(req, res) {
-	return new Promise((resolve, reject) => {
+export default async function authenticate(req, res) {
+	if (!jwkSecret) {
+		jwkSecret = await importJWK({
+				kty: 'oct',
+				k: process.env.JWT_SECRET
+		  	}, 'HS256');
+	}
+
+	return new Promise(async (resolve, reject) => {
 		const {query: {publicAddress}, method} = req
 
 		switch(method) {
@@ -34,7 +69,8 @@ export default function authenticate(req, res) {
 				// db lookup for nonce for address
 				if (publicAddress) 
 				{
-					res.status(200).json({nonce: 1234});
+					let result = await RetrieveNonce(publicAddress);
+					res.status(200).json({nonce: result});
 				} else {
 					res.status(404).send(ReactDOMServer.renderToString(<DefaultErrorPage statusCode={404}/>));
 				}
@@ -42,9 +78,20 @@ export default function authenticate(req, res) {
 				break;
 			}
 			case 'POST': {
-				VerifySignature(req.body.address, req.body.signature)
-					.then(token => {
-						res.status(200).json({logged_in: true, token: token});
+				let publicAddress = req.body.address;
+				let signedMessage = req.body.signature;
+
+				VerifySignature(publicAddress, signedMessage)
+					.then(async () => {
+						const jwt = await new SignJWT({ 'vorsin.tools:claim': true })
+							.setProtectedHeader({ alg: 'HS256' })
+							.setIssuedAt()
+							.setIssuer('vorsin.tools')
+							.setAudience(publicAddress)
+							.setExpirationTime('2h')
+							.sign(jwkSecret);
+
+						res.status(200).json({logged_in: true, token: jwt});
 
 						resolve();
 					})

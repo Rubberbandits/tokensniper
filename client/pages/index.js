@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import HeaderBanner from '../components/header_centered';
+import PartnerLogos from '../components/off_white_grid';
 
 export default function Home() {
   return (
@@ -25,6 +27,8 @@ export default function Home() {
 				</nav>
 			</div>
 		</header>
+
+		<HeaderBanner />
 
 		<div id="home">	
 		  <section class="text-blueGray-700 ">
@@ -127,7 +131,7 @@ export default function Home() {
 							<h2 class="text-gray-900 text-lg title-font font-medium">Dockerized Ethereum Node</h2>
 						</div>
 						<div class="flex-grow">
-							<p class="leading-relaxed text-base">Instead of relying on a third-party node or API to interact with the blockchain, we host our own Ethereum node. This allows the platform to make lighning-fast requests, blazing past the competition where it matters.</p>
+							<p class="leading-relaxed text-base">Instead of relying on a third-party node or API to interact with the blockchain, we host our own Ethereum node. This allows the platform to make lightning-fast requests, blazing past the competition where it matters.</p>
 						</div>
 						</div>
 					</div>
@@ -316,6 +320,8 @@ export default function Home() {
 				</div>
 			</section>
 		</div>
+
+		<PartnerLogos />
 
 		<footer class="text-gray-600 body-font">
 			<div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">

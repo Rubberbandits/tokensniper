@@ -3,6 +3,7 @@ import { bufferToHex } from 'ethereumjs-util';
 import { SignJWT } from 'jose/jwt/sign';
 import { importJWK } from 'jose/key/import';
 import { jwtVerify } from 'jose/jwt/verify';
+import { decode } from 'jose/util/base64url';
 
 import { db } from "./database";
 
@@ -67,7 +68,7 @@ var jwkSecret = null;
 
 export async function CreateSession(publicAddress, sessionTime, refreshTime)
 {
-	const session = await new SignJWT({session: true})
+	const session = await new SignJWT({ session: true })
 		.setProtectedHeader({ alg: 'HS256' })
 		.setIssuedAt()
 		.setIssuer('vorsin.tools')
@@ -75,7 +76,9 @@ export async function CreateSession(publicAddress, sessionTime, refreshTime)
 		.setExpirationTime(sessionTime)
 		.sign(jwkSecret);
 
-	const refresh = await new SignJWT({refresh: true})
+	const nonce = await RetrieveNonce(publicAddress);
+
+	const refresh = await new SignJWT({ refresh: true, nonce: nonce })
 		.setProtectedHeader({ alg: 'HS256' })
 		.setIssuedAt()
 		.setIssuer('vorsin.tools')
@@ -83,34 +86,51 @@ export async function CreateSession(publicAddress, sessionTime, refreshTime)
 		.setExpirationTime(refreshTime)
 		.sign(jwkSecret);
 
-	await db.query("REPLACE INTO `active_sessions` (`publicAddress`, `activeToken`) VALUES (?, ?);", [refresh, publicAddress]);
+	return {sessionJWT: session, refreshJWT: refresh};
+}
+
+export async function RefreshSession(publicAddress, sessionTime, refreshTime, originalIssueTime)
+{
+	const session = await new SignJWT({ session: true })
+		.setProtectedHeader({ alg: 'HS256' })
+		.setIssuedAt()
+		.setIssuer('vorsin.tools')
+		.setAudience(publicAddress)
+		.setExpirationTime(sessionTime)
+		.sign(jwkSecret);
+
+	const nonce = GetRandomNonce();
+	await db.query("UPDATE `users` SET `nonce` = ? WHERE `publicAddress` = ?;", [nonce, publicAddress.toLowerCase()]);
+
+	const refresh = await new SignJWT({ refresh: true, nonce: nonce })
+		.setProtectedHeader({ alg: 'HS256' })
+		.setIssuedAt(originalIssueTime)
+		.setIssuer('vorsin.tools')
+		.setAudience(publicAddress)
+		.setExpirationTime(refreshTime)
+		.sign(jwkSecret);
 
 	return {sessionJWT: session, refreshJWT: refresh};
 }
 
-export async function RefreshSession(publicAddress)
-{
-	let results = await db.query("SELECT `activeToken` FROM `active_sessions` WHERE `publicAddress` = ?;", publicAddress);
-	let activeToken = results[0].activeToken;
-
-	
-}
-
 export async function DestroySession(publicAddress)
 {
-
+	await db.query("UPDATE `users` SET `nonce` = ? WHERE `publicAddress` = ?;", [GetRandomNonce(), publicAddress.toLowerCase()]);
 }
 
 export async function VerifySession(sessionToken, maxAge)
 {
+	var encoded = sessionToken.split('.');
+	var payload = JSON.parse(decode(encoded[1]).toString());
+
 	try {
-		var { payload, protectedHeader } = await jwtVerify(sessionToken, jwkSecret, {
+		await jwtVerify(sessionToken, jwkSecret, {
 			issuer: 'vorsin.tools',
 			maxTokenAge: maxAge,
 		})
 	} catch (error) {
-		return {valid: false, err: error}
+		return {valid: false, err: error, payload: payload}
 	}
 
-	return {valid: true}
+	return {valid: true, err: false, payload: payload}
 }

@@ -2,7 +2,6 @@ import ReactDOMServer from "react-dom/server";
 import DefaultErrorPage from 'next/error';
 
 import { VerifySignature, RetrieveNonce, CreateSession } from "../../lib/verify_session";
-import { db } from "../../lib/database";
 
 export default async function authenticate(req, res) 
 {

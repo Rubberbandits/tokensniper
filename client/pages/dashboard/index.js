@@ -4,7 +4,7 @@ import DashboardLayout from "../../layouts/dashboard";
 
 import Login from "../../components/login";
 import NavBar from "../../components/navbar";
-import { VerifySession } from "../../lib/verify_session";
+import { VerifySession, RefreshSession, RetrieveNonce } from "../../lib/verify_session";
 
 function LoadingScreen() {
 	return (
@@ -25,14 +25,56 @@ export async function getServerSideProps(context) {
 	const {res, req} = context;
 	const {cookies} = req;
 
-	const {valid, err} = await VerifySession(cookies.sessionJWT, 600);
-
-	if (valid === false)
+	if (!cookies.sessionJWT) 
 		return {
 			props: {
 				logged_in: false
 			}
 		}
+
+	const {valid, err, payload} = await VerifySession(cookies.sessionJWT, 600);
+
+	if (payload.session != true)
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+
+	if (valid === false) {
+		if (err.code === 'ERR_JWT_EXPIRED') {
+			const {valid, err, payload} = await VerifySession(cookies.refreshJWT, 86400);
+			const publicAddress = payload.aud;
+
+			if (valid && payload.refresh) {
+				const nonce = await RetrieveNonce(publicAddress.toLowerCase());
+				if (nonce != payload.nonce) {
+					return {
+						props: {
+							logged_in: false
+						}
+					}
+				}
+
+				console.log(payload.iat)
+				const { sessionJWT, refreshJWT } = await RefreshSession(publicAddress, "10m", "24h", payload.iat);
+
+				res.setHeader('Set-Cookie', ['sessionJWT=' + sessionJWT, 'refreshJWT=' + refreshJWT]);
+
+				return {
+					props: {
+						logged_in: true
+					}
+				}
+			}
+		}
+
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+	}
 
 	return {
 		props: {

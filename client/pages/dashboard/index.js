@@ -3,7 +3,6 @@ import Head from "next/head";
 import DashboardLayout from "../../layouts/dashboard";
 
 import Login from "../../components/login";
-import NavBar from "../../components/navbar";
 import { VerifySession, RefreshSession, RetrieveNonce } from "../../lib/verify_session";
 
 function LoadingScreen() {
@@ -93,9 +92,21 @@ export default function Dashboard({logged_in}) {
 					<title>Vorsin Tools - Dashboard</title>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
-		
-				<div class="w-screen">
-					<NavBar />
+
+				<div>
+					<header class="bg-white shadow-sm">
+						<div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+							<h1 class="text-lg leading-6 font-semibold text-gray-900">
+								Dashboard
+							</h1>
+						</div>
+					</header>
+
+					<main class="flex h-screen bg-white">
+						<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+							<p class="text-black">CONTENT</p>
+						</div>
+					</main>
 				</div>
 			</>
 		)

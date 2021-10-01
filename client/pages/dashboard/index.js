@@ -56,7 +56,6 @@ export async function getServerSideProps(context) {
 					}
 				}
 
-				console.log(payload.iat)
 				const { sessionJWT, refreshJWT } = await RefreshSession(publicAddress, "10m", "24h", payload.iat);
 
 				res.setHeader('Set-Cookie', ['sessionJWT=' + sessionJWT, 'refreshJWT=' + refreshJWT]);

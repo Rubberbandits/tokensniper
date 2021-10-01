@@ -20,7 +20,8 @@ export default function Login() {
 					<span class="ml-3 text-xl">Vorsin Tools</span>
 				</a>
 				
-				<button id="login" class="btn btn-wide btn-lg bg-orange hover:bg-onyx">Login with Metamask</button>
+				<button id="login" class="btn btn-wide btn-lg bg-orange hover:bg-onyx mb-2">Login with Metamask</button>
+				<a href="/" class="btn btn-wide btn-lg bg-orange hover:bg-onyx">Go back to Home</a>
 			</div>
 		</div>
 	</>

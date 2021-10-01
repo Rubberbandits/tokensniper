@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
 	const {res, req} = context;
 	const {cookies} = req;
 
-	if (!cookies.sessionJWT) 
+	if (!cookies.sessionJWT || cookies.sessionJWT.length == 0) 
 		return {
 			props: {
 				logged_in: false
@@ -83,9 +83,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Dashboard({logged_in}) {
-	if (logged_in === false) 
-		return <Login />
-
 	if (logged_in === true) 
 		return (
 			<> 
@@ -94,20 +91,126 @@ export default function Dashboard({logged_in}) {
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 
-				<div>
-					<header class="bg-white shadow-sm">
-						<div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-							<h1 class="text-lg leading-6 font-semibold text-gray-900">
-								Dashboard
-							</h1>
-						</div>
-					</header>
+				<div class="flex flex-wrap flex-row justify-center">
+					<div class="card shadow xl:ml-0 mr-4">
+						<div class="card-body">
+							<h2 class="card-title text-onyx">Monitor Summary</h2> 
 
-					<main class="flex h-screen bg-white">
-						<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-							<p class="text-black">CONTENT</p>
+							<div class="overflow-x-auto">
+								<table data-theme="light" class="table w-full table-compact text-onyx">
+									<thead>
+										<tr>
+											<th></th> 
+											<th>Contract Name</th> 
+											<th>Variable</th> 
+											<th>Current Value</th> 
+											<th>Linked Action</th> 
+										</tr>
+									</thead> 
+									<tbody>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+										<tr>
+											<th></th> 
+											<td>No monitored contracts...</td>
+										</tr>
+									</tbody> 
+								</table>
+							</div>
 						</div>
-					</main>
+					</div>
+
+					<div class="card shadow">
+						<div class="card-body">
+							<h2 class="card-title text-onyx">Market Movements</h2> 
+
+							<div class="overflow-x-auto">
+								<table data-theme="light" class="table w-full table-compact text-onyx">
+									<thead>
+										<tr>
+											<th></th> 
+											<th>Contract Name</th> 
+											<th>Previous Floor</th> 
+											<th>Current Floor</th> 
+											<th>1h Volume</th> 
+											<th>24h Volume</th> 
+											<th>7d Volume</th> 
+											<th>All-Time Volume</th> 
+										</tr>
+									</thead> 
+									<tbody>
+										<tr>
+											<th></th> 
+											<td>N/A</td> 
+										</tr>
+									</tbody> 
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="card shadow lg:mt-4">
+						<div class="card-body">
+							<h2 class="card-title text-onyx">Holdings Summary</h2> 
+
+							<div class="overflow-x-auto">
+								<table data-theme="light" class="table w-full table-compact text-onyx">
+									<thead>
+										<tr>
+											<th></th> 
+											<th>Token ID</th> 
+											<th>Name</th> 
+											<th>Quantity</th> 
+											<th>Previous Floor</th>
+											<th>Current Floor</th>
+											<th>Percentage Delta</th>
+											<th>Trait Floor</th>
+										</tr>
+									</thead> 
+									<tbody>
+										<tr>
+											<th></th> 
+											<td>No tokens to display...</td> 
+										</tr>
+									</tbody> 
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</>
 		)

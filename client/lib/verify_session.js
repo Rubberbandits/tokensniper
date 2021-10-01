@@ -11,7 +11,7 @@ import { db } from "./database";
 	Verify Nonce Signature
 */
 
-function GetRandomNonce()
+export function GetRandomNonce()
 {
 	let randomNumber = Math.ceil(Math.random() * 9999);
 	return randomNumber < 1000 ? randomNumber + 1000 : randomNumber;

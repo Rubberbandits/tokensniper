@@ -38,6 +38,11 @@ async function LoginFlow()
 		.then(res => {
 			let nonce = res.nonce;
 
+			if (nonce === false) {
+				alert("You don't have an account!");
+				return;
+			}
+
 			web3.eth.personal.sign(`I am signing my one-time nonce: ${nonce}`, publicAddress, '')
 				.then(signature => {
 					SendLoginRequest(publicAddress, signature);

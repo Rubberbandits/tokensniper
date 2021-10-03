@@ -29,6 +29,10 @@ export default function Dashboard({logged_in}) {
 					<title>Vorsin Tools - Dashboard</title>
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
+
+				<div class="outline-black mt-4 h-96">
+
+				</div>
 			</>
 		)
 

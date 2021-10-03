@@ -16,7 +16,7 @@ export default function Holdings({logged_in}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div class="mt-8">
+			<div class="mt-8 justify-self-center">
 				<h2 class="card-title text-onyx">Holdings Summary</h2> 
 
 				<AccountHoldings />

@@ -31,7 +31,7 @@ export default function NavBar() {
 
 						<div class="hidden md:block">
 							<div class="ml-10 flex items-baseline space-x-4">
-								<a href="/dashboard" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+								<a href="/dashboard" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
 
 								<a href="/dashboard/metadata" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Metadata</a>
 

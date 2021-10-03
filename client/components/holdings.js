@@ -1,5 +1,6 @@
-import Head from 'next/head';
 import Script from "next/script";
+
+/* This shit is ugly as sin */
 
 const getHoldingsData = () => {
 	if (!process.browser) return

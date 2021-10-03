@@ -176,7 +176,7 @@ export async function genericGetServerSideProps(context) {
 
 				const { sessionJWT, refreshJWT } = await RefreshSession(publicAddress, "10m", "24h", payload.iat);
 
-				res.setHeader('Set-Cookie', ['sessionJWT=' + sessionJWT, 'refreshJWT=' + refreshJWT]);
+				res.setHeader('Set-Cookie', [`sessionJWT=${sessionJWT}; Path=/`, `refreshJWT=${refreshJWT}; Path=/`]);
 
 				return {
 					props: {

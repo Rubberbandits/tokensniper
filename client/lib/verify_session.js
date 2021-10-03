@@ -134,3 +134,68 @@ export async function VerifySession(sessionToken, maxAge)
 
 	return {valid: true, err: false, payload: payload}
 }
+
+/*
+	Generic getServerSideProps for all dashboard pages
+*/
+
+export async function genericGetServerSideProps(context) {
+	const {res, req} = context;
+	const {cookies} = req;
+
+	if (!cookies.sessionJWT || cookies.sessionJWT.length == 0) 
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+
+	const {valid, err, payload} = await VerifySession(cookies.sessionJWT, 600);
+
+	if (payload.session != true)
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+
+	if (valid === false) {
+		if (err.code === 'ERR_JWT_EXPIRED') {
+			const {valid, err, payload} = await VerifySession(cookies.refreshJWT, 86400);
+			const publicAddress = payload.aud;
+
+			if (valid && payload.refresh) {
+				const nonce = await RetrieveNonce(publicAddress.toLowerCase());
+				if (nonce != payload.nonce) {
+					return {
+						props: {
+							logged_in: false
+						}
+					}
+				}
+
+				const { sessionJWT, refreshJWT } = await RefreshSession(publicAddress, "10m", "24h", payload.iat);
+
+				res.setHeader('Set-Cookie', ['sessionJWT=' + sessionJWT, 'refreshJWT=' + refreshJWT]);
+
+				return {
+					props: {
+						logged_in: true
+					}
+				}
+			}
+		}
+
+		return {
+			props: {
+				logged_in: false
+			}
+		}
+	}
+
+	return {
+		props: {
+			logged_in: true
+		}
+	}
+}

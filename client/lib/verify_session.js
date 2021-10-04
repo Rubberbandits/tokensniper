@@ -139,25 +139,40 @@ export async function VerifySession(sessionToken, maxAge)
 	Generic getServerSideProps for all dashboard pages
 */
 
-export async function genericGetServerSideProps(context) {
+export async function genericGetServerSideProps(context) 
+{
 	const {res, req} = context;
+
+	const {valid, err_code} = await ValidateSession(req, res);
+	return {
+		props: {
+			logged_in: valid === true,
+			err_code: err_code || 0,
+		}
+	}
+}
+
+/*
+	Access Control
+*/
+
+const ERR_ACCESS_TOKEN_INVALID = 1;
+const ERR_ACCESS_SESSION_TOKEN = 2;
+const ERR_ACCESS_TOKEN_EXPIRED = 3;
+const ERR_ACCESS_NONCE_INVALID = 4;
+
+// we get passed the request and response objects directly, just as if we were in the request function
+export async function ValidateSession(req, res)
+{
 	const {cookies} = req;
 
 	if (!cookies.sessionJWT || cookies.sessionJWT.length == 0) 
-		return {
-			props: {
-				logged_in: false
-			}
-		}
+		return {valid: false, err_code: ERR_ACCESS_TOKEN_INVALID}
 
 	const {valid, err, payload} = await VerifySession(cookies.sessionJWT, 600);
 
 	if (payload.session != true)
-		return {
-			props: {
-				logged_in: false
-			}
-		}
+		return {valid: false, err_code: ERR_ACCESS_SESSION_TOKEN}
 
 	if (valid === false) {
 		if (err.code === 'ERR_JWT_EXPIRED') {
@@ -167,35 +182,19 @@ export async function genericGetServerSideProps(context) {
 			if (valid && payload.refresh) {
 				const nonce = await RetrieveNonce(publicAddress.toLowerCase());
 				if (nonce != payload.nonce) {
-					return {
-						props: {
-							logged_in: false
-						}
-					}
+					return {valid: false, err_code: ERR_ACCESS_NONCE_INVALID}
 				}
 
 				const { sessionJWT, refreshJWT } = await RefreshSession(publicAddress, "10m", "24h", payload.iat);
 
 				res.setHeader('Set-Cookie', [`sessionJWT=${sessionJWT}; Path=/`, `refreshJWT=${refreshJWT}; Path=/`]);
 
-				return {
-					props: {
-						logged_in: true
-					}
-				}
+				return {valid: true}
 			}
 		}
 
-		return {
-			props: {
-				logged_in: false
-			}
-		}
+		return {valid: false, err_code: ERR_ACCESS_TOKEN_INVALID}
 	}
 
-	return {
-		props: {
-			logged_in: true
-		}
-	}
+	return {valid: true}
 }

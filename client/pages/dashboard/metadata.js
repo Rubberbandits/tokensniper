@@ -8,8 +8,8 @@ export var getServerSideProps = genericGetServerSideProps;
 
 export default function Metadata({logged_in}) {
 	return (
-		<div>
-			
+		<div class="mt-8 justify-self-center">
+			<h2 class="card-title text-onyx">Metadata - WIP</h2> 
 		</div>
 	)
 }

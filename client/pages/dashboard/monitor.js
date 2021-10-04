@@ -8,8 +8,8 @@ export var getServerSideProps = genericGetServerSideProps;
 
 export default function Monitor({logged_in}) {
 	return (
-		<div>
-			
+		<div class="mt-8 justify-self-center">
+			<h2 class="card-title text-onyx">Contract Monitor - WIP</h2> 
 		</div>
 	)
 }

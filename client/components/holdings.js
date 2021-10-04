@@ -19,11 +19,11 @@ const getHoldingsData = () => {
 		eContractName.innerText = contractName || "";
 		tr.appendChild(eContractName);
 
-		const eTokenID = document.createElement("th");
+		const eTokenID = document.createElement("td");
 		eTokenID.innerText = tokenID || "";
 		tr.appendChild(eTokenID);
 
-		const eTokenName = document.createElement("th");
+		const eTokenName = document.createElement("td");
 		eTokenName.innerText = tokenName || "";
 		tr.appendChild(eTokenName);
 
@@ -73,6 +73,7 @@ const getHoldingsData = () => {
 						})
 
 						data.assets.forEach(asset => {
+							console.log(asset.orders);
 							asset.traits.sort((a, b) => {return a.trait_count - b.trait_count})
 							const rarestTrait = asset.traits[0];
 

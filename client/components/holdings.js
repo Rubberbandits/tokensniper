@@ -5,6 +5,57 @@ import Script from "next/script";
 const getHoldingsData = () => {
 	if (!process.browser) return
 
+	function addRow(rowData) 
+	{
+		const {index, contractName, tokenID, tokenName, prevFloor, curFloor, delta, traitFloor} = rowData;
+
+		const tr = document.createElement("tr");
+
+		const count = document.createElement("th");
+		count.innerText = index || "";
+		tr.appendChild(count);
+
+		const eContractName = document.createElement("th");
+		eContractName.innerText = contractName || "";
+		tr.appendChild(eContractName);
+
+		const eTokenID = document.createElement("th");
+		eTokenID.innerText = tokenID || "";
+		tr.appendChild(eTokenID);
+
+		const eTokenName = document.createElement("th");
+		eTokenName.innerText = tokenName || "";
+		tr.appendChild(eTokenName);
+
+		const ePreviousFloor = document.createElement("th");
+		ePreviousFloor.innerText = prevFloor || "";
+		tr.appendChild(ePreviousFloor);
+
+		const eCurrentFloor = document.createElement("th");
+		eCurrentFloor.innerText = curFloor || "";
+		tr.appendChild(eCurrentFloor);
+
+		const eFloorDelta = document.createElement("th");
+		eFloorDelta.innerText = delta || "";
+		tr.appendChild(eFloorDelta);
+
+		if (traitFloor) {
+			const eTraitFloor = document.createElement("td");
+
+			const eTraitFloorLink = document.createElement("a");
+			eTraitFloorLink.href = traitFloor;
+			eTraitFloorLink.target = "_blank";
+			eTraitFloorLink.innerText = "View";
+
+			eTraitFloor.appendChild(eTraitFloorLink);
+			tr.appendChild(eTraitFloor);
+		}
+
+		holdingsBody.appendChild(tr);
+
+		return tr;
+	}
+
 	const publicAddress = sessionStorage.getItem("publicAddress")
 
 	fetch(`https://api.opensea.io/api/v1/collections?asset_owner=${publicAddress}&offset=0`)
@@ -16,78 +67,22 @@ const getHoldingsData = () => {
 				fetch(`https://api.opensea.io/api/v1/assets?owner=${publicAddress}&asset_contract_address=${collection.primary_asset_contracts[0].address}&order_direction=desc&offset=0&limit=50`)
 					.then(res => res.json())
 					.then(data => {
-						const tr = document.createElement("tr");
-
-						const count = document.createElement("th");
-						count.innerText = "";
-						tr.appendChild(count);
-		
-						const contractName = document.createElement("th");
-						contractName.innerText = collection.name;
-						tr.appendChild(contractName);
-		
-						const tokenID = document.createElement("th");
-						tokenID.innerText = "";
-						tr.appendChild(tokenID);
-		
-						const tokenName = document.createElement("th");
-						tokenName.innerText = "";
-						tr.appendChild(tokenName);
-		
-						const prevFloor = document.createElement("th");
-						prevFloor.innerText = "";
-						tr.appendChild(prevFloor);
-		
-						const curFloor = document.createElement("th");
-						curFloor.innerText = collection.stats.floor_price;
-						tr.appendChild(curFloor);
-		
-						const delta = document.createElement("th");
-						delta.innerText = "";
-						tr.appendChild(delta);
-		
-						const traitFloor = document.createElement("th");
-						traitFloor.innerText = "";
-						tr.appendChild(traitFloor);
-		
-						holdingsBody.appendChild(tr);
+						addRow({
+							contractName: collection.name,
+							curFloor: collection.stats.floor_price,
+						})
 
 						data.assets.forEach(asset => {
-							const tr = document.createElement("tr");
+							asset.traits.sort((a, b) => {return a.trait_count - b.trait_count})
+							const rarestTrait = asset.traits[0];
 
-							const count = document.createElement("td");
-							count.innerText = "";
-							tr.appendChild(count);
-			
-							const contractName = document.createElement("td");
-							contractName.innerText = "";
-							tr.appendChild(contractName);
-			
-							const tokenID = document.createElement("td");
-							tokenID.innerText = asset.token_id;
-							tr.appendChild(tokenID);
-			
-							const tokenName = document.createElement("td");
-							tokenName.innerText = asset.name;
-							tr.appendChild(tokenName);
-			
-							const prevFloor = document.createElement("td");
-							prevFloor.innerText = "";
-							tr.appendChild(prevFloor);
-			
-							const curFloor = document.createElement("td");
-							curFloor.innerText = "";
-							tr.appendChild(curFloor);
-			
-							const delta = document.createElement("td");
-							delta.innerText = "";
-							tr.appendChild(delta);
-			
-							const traitFloor = document.createElement("td");
-							traitFloor.innerText = "";
-							tr.appendChild(traitFloor);
-			
-							holdingsBody.appendChild(tr);
+							const url = `https://opensea.io/collection/${collection.slug}?search[sortAscending]=true&search[sortBy]=PRICE&search[stringTraits][0][name]=${rarestTrait.trait_type}&search[stringTraits][0][values][0]=${rarestTrait.value}&search[toggles][0]=BUY_NOW`
+
+							const row = addRow({
+								tokenID: asset.token_id,
+								tokenName: asset.name,
+								traitFloor: url
+							})
 						})
 					})
 			})

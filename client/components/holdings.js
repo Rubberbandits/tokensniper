@@ -2,7 +2,7 @@ import Script from "next/script";
 
 /* This shit is ugly as sin */
 
-const getHoldingsData = () => {
+const getHoldingsData = async () => {
 	if (!process.browser) return
 
 	function addRow(rowData) 
@@ -92,7 +92,7 @@ const getHoldingsData = () => {
 export default function AccountHoldings() {
 	return (
 		<>
-			<Script onLoad={getHoldingsData()}/>
+			<Script async onLoad={getHoldingsData()}/>
 
 			<div class="overflow-x-auto">
 				<table id="holdings" data-theme="light" class="table w-full table-compact text-onyx">

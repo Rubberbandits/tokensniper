@@ -61,55 +61,6 @@ http.globalAgent = new http.Agent({
 	maxFreeSockets: 256,
 })
 
-function API_REQUEST(_tokenURI) 
-{
-	let _promise = new Promise((resolve, reject) => {
-		http.get(_tokenURI, (res) => {
-			const { statusCode } = res;
-			const contentType = res.headers['content-type'];
-			
-			let error;
-			// Any 2xx status code signals a successful response but
-			// here we're only checking for 200.
-			if (statusCode !== 200) {
-				error = new Error('Request Failed.\n' +
-								`Status Code: ${statusCode}`);
-			} else if (!/^application\/json/.test(contentType) && !/^binary\/octet-stream/.test(contentType)) {
-				error = new Error('Invalid content-type.\n' +
-								`Expected application/json or binary/octet-stream but received ${contentType}`);
-			}
-			if (error) {
-				// Consume response data to free up memory
-				res.resume();
-
-				// Reject promise
-				reject(error.message);
-
-				return;
-			}
-			
-			res.setEncoding('utf8');
-			let rawData = '';
-			res.on('data', (chunk) => { rawData += chunk; });
-			res.on('end', () => {
-				let _handler = DATA_HANDLER[contentType.split(";")[0]];
-				if (!_handler) {
-					reject("Error: invalid data handler! Content type: " + contentType);
-					return;
-				}
-
-				let _processedData = _handler(rawData);
-
-				resolve(_processedData);
-			});
-		}).on('error', (e) => {
-			reject(e.message);
-		});
-	});
-
-	return _promise;
-}
-
 function INFURA_REQUEST(_requestData)
 {
 	let _promise = new Promise((resolve, reject) => {
@@ -171,4 +122,3 @@ function WEB3_SHA3(_string)
 exports.WEB3_SHA3 = WEB3_SHA3;
 exports.INFURA_REQUEST = INFURA_REQUEST;
 exports.OPENSEA_REQUEST = OPENSEA_REQUEST;
-exports.API_REQUEST = API_REQUEST;

@@ -83,7 +83,7 @@ function MonitorMetadata(_address)
 
 			lastBaseURI = _tokenURI;
 			
-			utils.API_REQUEST(_tokenURI)
+			network.API_REQUEST(_tokenURI)
 				.then(_tokenData => {
 					let _json = JSON.stringify(_tokenData);
 
@@ -155,7 +155,7 @@ process.on("SIGINT", () => {
 
 async function main() {
 	let _tokenIDs = [];
-	for (let i = 0; i < 4444; i++) {
+	for (let i = 0; i < 20; i++) {
 		_tokenIDs.push(i);
 	}
 

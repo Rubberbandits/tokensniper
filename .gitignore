@@ -1,5 +1,6 @@
 /server/.env
 /server/node_modules
 /client/.env
+/scrape-api/node_modules
 test.js
 .env

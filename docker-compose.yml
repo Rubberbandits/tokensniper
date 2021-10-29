@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - db_data:/var/lib/mysql
+  client:
+    build: ./client
+    restart: on-failure
+    ports:
+      - 3000:3000
+    depends_on: 
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_PORT=3306
+      - JWT_SECRET=${CLIENT_JWT_SECRET}
+volumes:
+  db_data:

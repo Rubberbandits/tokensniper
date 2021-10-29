@@ -4,3 +4,6 @@
 /scrape-api/node_modules
 test.js
 .env
+
+/scrape-api/package-lock.json
+/scrape-api/yarn.lock

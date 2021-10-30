@@ -1,6 +1,6 @@
 /*
 	Query parameters
-	===
+	_________________
 
 	collectionID | string | single collection slug
 	collections | array | multiple collection slugs, numerically indexed array
@@ -26,6 +26,7 @@
 			}
 	eventTypes | array | ?
 		-- "AUCTION_SUCCESSFUL"
+		-- "ASSET_TRANSFER"
 	toggles | array or null | only return data with matching specifiers
 		-- "BUY_NOW"
 		-- "ON_AUCTION"

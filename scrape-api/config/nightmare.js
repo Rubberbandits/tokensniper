@@ -42,8 +42,7 @@ exports.gqlRun = function(queryID, variables, cb) {
 		return;
 	}
 
-	let body = query("nautilus-nft");
-	console.log(body)
+	let body = query(variables);
 	
 	nightmare
 	.evaluate(async (body, signature) => {

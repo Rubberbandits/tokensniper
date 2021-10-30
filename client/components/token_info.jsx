@@ -8,7 +8,7 @@ export default class TokenInfo extends React.Component {
 	}
 
 	onClick() {
-		this.setState((state) => ({
+		this.setState(state => ({
 			open: !state.open
 		}));
 	}

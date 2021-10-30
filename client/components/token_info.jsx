@@ -1,10 +1,10 @@
-export default function TokenInfo({tokenData})
+export default function TokenInfo({entry, tokenData})
 {
 	return (
 		<tr>
-			<td />
-			<td />
-			<td />
+			<td>#{entry + 1}</td>
+			<td>{tokenData.collection.name}</td>
+			<td>{tokenData.tokenId}</td>
 			<td>
 				{tokenData.name}
 			</td>

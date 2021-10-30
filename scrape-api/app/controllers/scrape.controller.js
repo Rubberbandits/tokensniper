@@ -1,7 +1,7 @@
 const scrape = require('../../config/nightmare');
 
 exports.test = function(req, res) {
-	scrape.gqlRun("PriceHistoryQuery", {collectionID: "lady-killaz", cutoffDate: (new Date(Date.now() - (1000 * 60 * 60 * 24 * 7))).toJSON()}, (data) => {
+	scrape.gqlRun("AssetSearchQuery", {collectionID: "lady-killaz"}, (data) => {
 		res.status(200).send(data);
 	});
 

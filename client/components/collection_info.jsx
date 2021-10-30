@@ -22,10 +22,10 @@ export default function CollectionInfo({walletAddr})
 	}
 
 	let entries = [];
-	info.collection.edges.forEach(asset => {
+	info.collection.edges.forEach((asset, index) => {
 		let tokenData = asset.node.asset;
 
-		entries.push(<TokenInfo tokenData={tokenData}/>);
+		entries.push(<TokenInfo entry={index} tokenData={tokenData}/>);
 	})
 
 	console.log(info)

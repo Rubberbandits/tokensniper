@@ -7,7 +7,7 @@ const CollectionInfo = dynamic(() => import('./collection_info'), {
 export default function AccountHoldings() {
 	return (
 		<>
-			<div class="overflow-x-auto">
+			<div class="flex flex-col overflow-x-auto">
 				{process.browser && <CollectionInfo walletAddr={sessionStorage.getItem("publicAddress")}/>}
 			</div>
 		</>

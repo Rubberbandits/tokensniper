@@ -24,19 +24,18 @@ export default function CollectionInfo({walletAddr})
 	let entries = [];
 	info.collection.edges.forEach((asset, index) => {
 		let tokenData = asset.node.asset;
+		if (index == 0) {
+			console.log(tokenData);
+		}
 
 		entries.push(<TokenInfo entry={index} tokenData={tokenData}/>);
 	})
 
-	console.log(info)
 	return (
 		<>
-			<div data-theme="light" className="form-control w-96 m-2">
-				<label className="label">
-					<span className="label-text">Wallet Address</span>
-				</label> 
+			<div data-theme="light" className="form-control w-96 mb-2 self-end">
 				<div className="flex space-x-2">
-					<input id="walletAddr" type="text" placeholder="Search" className="w-full input" /> 
+					<input id="walletAddr" type="text" placeholder="Address" className="w-full input" /> 
 					<button className="btn">go</button>
 				</div>
 			</div>
@@ -44,14 +43,14 @@ export default function CollectionInfo({walletAddr})
 			<table data-theme="light" className="table w-full table-compact text-onyx">
 				<thead>
 					<tr>
-						<th></th> 
+						<th className="overflow-visible w-0 relative"></th> 
 						<th>Contract</th>
 						<th>Token ID</th>
 						<th>Name</th>
 						<th>Previous Floor</th>
 						<th>Current Floor</th>
-						<th>Percentage Delta</th>
-						<th>Trait Floor</th>
+						<th>Previous Trait Floor</th>
+						<th>Current Trait Floor</th>
 					</tr>
 				</thead>
 

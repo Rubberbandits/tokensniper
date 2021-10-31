@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, router }) {
 	if (pageProps.logged_in === false && router.pathname.startsWith("/dashboard")) {
 		return (
 			<>
-				<Script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" strategy="beforeInteractive"/>
+				<Script async src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" strategy="afterInteractive"/>
 				<Login />
 			</>
 		)
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps, router }) {
 
 	return (
 		<>
-			<Script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" strategy="beforeInteractive"/>
+			<Script async src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" strategy="afterInteractive"/>
 
 			<Layout>
 				<Component {...pageProps} />

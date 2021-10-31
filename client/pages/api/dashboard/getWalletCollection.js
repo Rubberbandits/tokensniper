@@ -9,5 +9,5 @@ export default async function getWalletCollection(req, res)
 	const response = await fetch("http://localhost:5000/api/scrape")
 		.then(res => res.json())
 	
-	res.status(200).send(response.data.query.search);
+	res.status(200).send(response.data.assets);
 }

@@ -23,5 +23,9 @@ export default function DeepTokenInfo({tokenData})
 		return <Loading />;
 	}
 
-	return <></>
+	return (
+		<>
+			<p>DRAWER IS OPEN ----------- DATA DATA DATA DATA DATA HERE</p>
+		</>
+	);
 }

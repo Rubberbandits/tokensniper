@@ -28,7 +28,7 @@ export default function CollectionInfo({walletAddr})
 			console.log(tokenData);
 		}
 
-		entries.push(<TokenInfo entry={index} tokenData={tokenData}/>);
+		entries.push(<TokenInfo key={index} entry={index} tokenData={tokenData}/>);
 	})
 
 	return (

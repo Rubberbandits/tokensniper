@@ -22,6 +22,8 @@ fs.readdirSync(normalizedPath).forEach(function(file) {
   	GRAPHQL_MAP[queryID] = {query: query, signature: signature};
 });
 
+exports.GRAPHQL_MAP = GRAPHQL_MAP;
+
 exports.setup = function(cb) {
     nightmare
 	.goto("https://opensea.io/collection/lady-killaz")

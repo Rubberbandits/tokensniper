@@ -24,6 +24,7 @@ module.exports = function() {
     app.use(handleBadJson);
 
     require('../app/routes/scrape.routes')(app);
+	require("../app/routes/data.routes")(app);
 
     return app;
 };

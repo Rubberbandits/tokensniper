@@ -1,0 +1,25 @@
+{
+  "name": "tokensniper",
+  "version": "1.0.0",
+  "description": "A project for allowing users to get alerts when rare NFT's are available for sale",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+	"scrape-api-dev": "cd ./scrape-api & yarn run dev",
+	"intermediate-api-dev": "cd ./intermediate-api & yarn run dev",
+	"client-dev": "cd ./client & yarn run dev",
+    "dev": "start yarn run scrape-api-dev && start yarn run intermediate-api-dev && start yarn run client-dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rubberbandits/tokensniper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rubberbandits/tokensniper/issues"
+  },
+  "homepage": "https://github.com/Rubberbandits/tokensniper#readme"
+}

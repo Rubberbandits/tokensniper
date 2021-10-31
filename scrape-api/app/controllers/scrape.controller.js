@@ -1,9 +1,13 @@
 const scrape = require('../../config/nightmare');
 
 exports.test = function(req, res) {
-	scrape.gqlRun("accountQuery", {address: "0x7aa4720178a05654D48182aCF853b4eC1fe5f7E5"}, (data) => {
-		res.status(200).send(data);
-	});
+	try {
+		scrape.gqlRun("accountQuery", undefined, (data) => {
+			res.status(200).send(data);
+		});
+	} catch {
+		res.status(500).send("An error has occurred.")
+	}
 
 	/*
     scrape.scrapeTest(function(data) {

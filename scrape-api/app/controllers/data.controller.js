@@ -12,7 +12,11 @@ exports.main = function(req, res) {
 		return;
 	}
 
-	nightmare.gqlRun(queryID, variables, (data) => {
-		res.status(200).send(data);
-	});
+	try {
+		nightmare.gqlRun(queryID, variables, (data) => {
+			res.status(200).send(data);
+		});
+	} catch {
+		res.status(500).send("An error has occurred.")
+	}
 }

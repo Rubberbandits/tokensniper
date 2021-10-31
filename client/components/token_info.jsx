@@ -28,7 +28,7 @@ export default class TokenInfo extends React.Component {
 	
 				{this.state.open && <tr>
 					<td>
-						<div className="overflow-visible flex w-0 ml-12">
+						<div className="overflow-visible flex w-0">
 							<DeepTokenInfo tokenData={tokenData} />
 						</div>
 					</td>

@@ -1,5 +1,5 @@
 const { objectFilter } = require("../util/object_map");
-const data = require("./data.controller");
+const data = require("../util/data_post");
 
 const ACCOUNT_MAP = {
 	address: true

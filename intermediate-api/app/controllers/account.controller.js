@@ -21,11 +21,11 @@ exports.get = function(req, res)
 	
 	data.post("/api/data", {query: "accountQuery", variables: {address: publicAddress}})
 		.catch(err => res.status(500).send(err))
-		.then(data => {
-			let account = data.data.account;
+		.then(query => {
+			let account = query.data.account;
 			let assets = [];
 
-			data.data.assets.search.edges.forEach((asset, index) => {
+			query.data.assets.search.edges.forEach((asset, index) => {
 				let assetData = asset.node.asset;
 
 				assets.push(Object.fromEntries(Object.entries(assetData).map(([k, v]) => [k, ASSET_MAP[k] ? v : undefined])))

@@ -22,9 +22,7 @@ export default function CollectionInfo({walletAddr})
 	}
 
 	let entries = [];
-	info.collection.search.edges.forEach((asset, index) => {
-		let tokenData = asset.node.asset;
-
+	info.collection.assets.forEach((tokenData, index) => {
 		entries.push(<TokenInfo key={index} entry={index} tokenData={tokenData}/>);
 	})
 

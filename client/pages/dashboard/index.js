@@ -13,7 +13,7 @@ function LoadingScreen() {
 			</Head>
 
 			<div className="flex justify-center align-middle">
-				<button class="btn btn-lg btn-ghost loading flex align-middle">loading</button>
+				<button className="btn btn-lg btn-ghost loading flex align-middle">loading</button>
 			</div>
 		</div>
 	)
@@ -30,7 +30,7 @@ export default function Dashboard({logged_in}) {
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 
-				<div class="outline-black mt-4 h-96">
+				<div className="outline-black mt-4 h-96">
 
 				</div>
 			</>

@@ -11,8 +11,8 @@ export default function DashboardLayout({ children }) {
 
 			<NavBar />
 
-			<main class="flex bg-white">
-				<div class="w-full py-6 sm:px-6 lg:px-8">
+			<main className="flex bg-white">
+				<div className="w-full py-6 sm:px-6 lg:px-8">
 					{children}
 				</div>
 			</main>

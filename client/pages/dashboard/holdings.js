@@ -16,8 +16,8 @@ export default function Holdings({logged_in}) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<div class="mt-8 justify-self-center">
-				<h2 class="card-title text-onyx">Holdings</h2> 
+			<div className="mt-8 justify-self-center">
+				<h2 className="card-title text-onyx">Holdings</h2> 
 
 				<AccountHoldings />
 			</div>

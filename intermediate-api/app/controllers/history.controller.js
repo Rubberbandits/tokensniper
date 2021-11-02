@@ -1,4 +1,5 @@
 const { objectFilter } = require("../util/object_map");
+const { errorHandler } = require("../util/error_response");
 const data = require("../util/data_post");
 
 const EVENT_MAP = {
@@ -53,7 +54,6 @@ exports.getEvents = function(req, res)
 	}
 
 	data.post("/api/data", {query: "EventHistoryQuery", variables: {collectionID: slug, eventTypes: events, count: count}})
-		.catch(err => res.status(500).send(err))
 		.then(query => {
 			let edges = query.data.assetEvents.edges;
 			let events = [];
@@ -64,7 +64,8 @@ exports.getEvents = function(req, res)
 			});
 
 			res.status(200).send(events);
-		});
+		})
+		.catch(err => res.status(500).send(errorHandler(err)));
 }
 
 const PRICE_MAP = {
@@ -96,5 +97,5 @@ exports.getPrices = function(req, res)
 
 			res.status(200).send(tradeHistory);
 		})
-		.catch(err => res.status(500).send(err));
+		.catch(err => res.status(500).send(errorHandler(err)));
 }

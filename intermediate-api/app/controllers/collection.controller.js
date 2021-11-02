@@ -1,4 +1,5 @@
 const { objectFilter } = require("../util/object_map");
+const { errorHandler } = require("../util/error_response");
 const data = require("../util/data_post");
 
 const COLLECTION_MAP = {
@@ -27,7 +28,7 @@ exports.get = function(req, res)
 	}
 
 	data.post("/api/data", {query: "collectionQuery", variables: {collectionID: slug}})
-		.catch(err => res.status(500).send(err))
+		.catch(err => res.status(500).send(errorHandler(err)))
 		.then(query => {
 			let collection = objectFilter(query.data.collection, COLLECTION_MAP);
 			collection.traits = query.data.assets.collection.stringTraits;

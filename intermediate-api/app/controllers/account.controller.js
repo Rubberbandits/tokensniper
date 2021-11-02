@@ -1,4 +1,5 @@
 const { objectFilter } = require("../util/object_map");
+const { errorHandler } = require("../util/error_response");
 const data = require("../util/data_post");
 
 const ACCOUNT_MAP = {
@@ -44,7 +45,7 @@ exports.get = function(req, res)
 	}
 
 	data.post("/api/data", {query: "accountQuery", variables: {address: publicAddress}})
-		.catch(err => res.status(500).send(err))
+		.catch(err => res.status(500).send(errorHandler(err)))
 		.then(query => {
 			let account = query.data.account;
 			let assets = [];

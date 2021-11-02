@@ -61,7 +61,6 @@ exports.gqlRun = function(queryID, variables, cb) {
 				"sec-fetch-mode": "cors",
 				"sec-fetch-site": "same-site",
 				"x-api-key": "2f6f419a083c46de9d83ce3dbe7db601",
-				"x-build-id": "q_vl0PijDKozXlx5SdghX",
 				"x-signed-query": signature,
 				"Referer": "https://opensea.io/",
 			},

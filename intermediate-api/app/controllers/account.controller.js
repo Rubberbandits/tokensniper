@@ -1,3 +1,4 @@
+const { objectFilter } = require("../util/object_map");
 const data = require("./data.controller");
 
 const ACCOUNT_MAP = {
@@ -10,15 +11,38 @@ const ASSET_MAP = {
 	orderData: true,
 	tokenId: true,
 	ownedQuantity: true,
-	collection: true,
-	assetContract: true,
-	assetEventData: true
+	collection: {
+		imageUrl: true,
+		name: true,
+		slug: true,
+	},
+	assetContract: {
+		address: true
+	},
+	assetEventData: {
+		lastSale: {
+			unitPriceQuantity: {
+				asset: {
+					decimals: true,
+					symbol: true,
+					usdSpotPrice: true,
+
+				},
+				quantity: true
+			}
+		}
+	}
 }
 
 exports.get = function(req, res)
 {
 	const {query: {publicAddress}} = req;
 	
+	if (!publicAddress) {
+		res.status(400).send("Bad request");
+		return;
+	}
+
 	data.post("/api/data", {query: "accountQuery", variables: {address: publicAddress}})
 		.catch(err => res.status(500).send(err))
 		.then(query => {
@@ -28,11 +52,11 @@ exports.get = function(req, res)
 			query.data.assets.search.edges.forEach((asset, index) => {
 				let assetData = asset.node.asset;
 
-				assets.push(Object.fromEntries(Object.entries(assetData).map(([k, v]) => [k, ASSET_MAP[k] ? v : undefined])))
+				assets.push(objectFilter(assetData, ASSET_MAP));
 			});
 
 			let payload = {
-				account: Object.fromEntries(Object.entries(account).map(([k, v]) => [k, ACCOUNT_MAP[k] ? v : undefined])),
+				account: objectFilter(account, ACCOUNT_MAP),
 				assets: assets
 			};
 

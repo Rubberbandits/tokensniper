@@ -86,14 +86,15 @@ exports.getPrices = function(req, res)
 	}
 
 	data.post("/api/data", {query: "PriceHistoryQuery", variables: {collectionID: slug, cutoffDate: date}})
-		.catch(err => res.status(500).send(err))
 		.then(query => {
 			let results = query.data.tradeHistory.results;
 			let tradeHistory = [];
+			
 			results.forEach(bucket => {
 				tradeHistory.push(objectFilter(bucket, PRICE_MAP));
 			});
 
 			res.status(200).send(tradeHistory);
-		});
+		})
+		.catch(err => res.status(500).send(err));
 }

@@ -14,6 +14,11 @@ exports.main = function(req, res) {
 
 	//try {
 		nightmare.gqlRun(queryID, variables, (data) => {
+			if (!data.data && data.errors) {
+				res.status(500).send(data);
+				return;
+			}
+
 			res.status(200).send(data);
 		});
 	/*} catch {

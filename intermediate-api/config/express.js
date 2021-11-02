@@ -25,6 +25,7 @@ module.exports = function() {
 
 	require("../app/routes/account.routes")(app);
 	require("../app/routes/collection.routes")(app);
+	require("../app/routes/history.routes")(app);
 
     return app;
 };

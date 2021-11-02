@@ -1,3 +1,5 @@
+// I really don't know how I feel about this whole function
+
 function objectFilter(obj, filterObject, notRecursive)
 {
 	let newObjectEntries = Object.entries(obj).map(

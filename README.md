@@ -1,3 +1,6 @@
+# WARNING!!!!
+This project has been moved to git.vorsin.tech
+
 # Token Sniper
 A project for allowing users to get alerts when rare NFT's are available for sale
 
